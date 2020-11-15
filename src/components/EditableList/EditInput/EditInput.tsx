@@ -19,6 +19,7 @@ export const EditInput: React.FunctionComponent<Props> = ({ defaultValue = '', o
   return (
     <Wrapper>
       <Input
+        autoFocus
         value={value}
         onChange={(e) => {
           setValue(e.target.value);

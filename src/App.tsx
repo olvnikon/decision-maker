@@ -2,11 +2,14 @@ import React from 'react';
 import { Divider, Layout } from 'antd';
 import 'antd/dist/antd.css';
 
-import { EditableList } from './components/EditableList';
 import { criteriaToWeights, generateCombinations, calculateTotals } from './utilities';
+import { listWithRecoilState } from './common/hocs/listWithRecoilState';
+import { comparisonAtom, criteriaAtom } from './state/atoms';
 import styles from './App.module.scss';
 
 const { Content } = Layout;
+const ComparisonList = listWithRecoilState(comparisonAtom);
+const CriteriaList = listWithRecoilState(criteriaAtom);
 
 const criteria = ['cost', 'rank', 'location'];
 const criteriaComp = [5, 7, 3];
@@ -26,9 +29,9 @@ function App() {
   return (
     <Layout>
       <Content className={styles.App}>
-        <EditableList placeholder="Enter a thing to compare" name="Comparison" />
+        <ComparisonList placeholder="Enter a thing to compare" name="Comparison" />
         <Divider />
-        <EditableList placeholder="Enter a criteria to compare" name="Criteria" />
+        <CriteriaList placeholder="Enter a criteria to compare" name="Criteria" />
       </Content>
     </Layout>
   );

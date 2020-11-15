@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from 'antd';
+import { Input, notification } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
@@ -22,8 +22,17 @@ export const AddInput: React.FunctionComponent<Props> = ({ placeholder = '', onA
         placeholder={placeholder}
         enterButton={<PlusOutlined />}
         onSearch={(curVal) => {
-          onAction(curVal);
-          setValue('');
+          if (curVal.trim() === '') {
+            notification.error({
+              message: 'Please enter text',
+            });
+          } else {
+            notification.success({
+              message: `${curVal} was added to the list`,
+            });
+            onAction(curVal);
+            setValue('');
+          }
         }}
         size="large"
         value={value}
