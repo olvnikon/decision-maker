@@ -1,6 +1,12 @@
 import React from 'react';
-import { criteriaToWeights, generateCombinations } from './utilities/criteriaWeight';
-import { calculateTotals } from './utilities/criteriaUtility';
+import { Divider, Layout } from 'antd';
+import 'antd/dist/antd.css';
+
+import { EditableList } from './components/EditableList';
+import { criteriaToWeights, generateCombinations, calculateTotals } from './utilities';
+import styles from './App.module.scss';
+
+const { Content } = Layout;
 
 const criteria = ['cost', 'rank', 'location'];
 const criteriaComp = [5, 7, 3];
@@ -18,13 +24,13 @@ const totals = calculateTotals(comparatorsUtilityValues, criteriaRightLimit)(wei
 
 function App() {
   return (
-    <div>
-      {comparators.map((c, i) => (
-        <div key={i}>
-          {c} - {totals[i]}
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <Content className={styles.App}>
+        <EditableList placeholder="Enter a thing to compare" name="Comparison" />
+        <Divider />
+        <EditableList placeholder="Enter a criteria to compare" name="Criteria" />
+      </Content>
+    </Layout>
   );
 }
 
