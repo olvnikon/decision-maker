@@ -24,6 +24,7 @@ const applyCriteriaValue = (combinationComp: number[]) => (combs: combinationsT)
 
 const generateMatrix = (combinationValues: combinationsT): matrixT => {
   const matrix = [...new Array(combinationValues.length)].map(() => [...new Array(combinationValues.length)]);
+  // FIXME: matrix is generated incorrectly
   combinationValues.forEach(([i1, i2, value]) => {
     matrix[i1][i2] = value;
     matrix[i2][i1] = 1 / value;
