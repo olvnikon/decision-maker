@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Layout } from 'antd';
+import { Divider, Layout, Collapse } from 'antd';
 import 'antd/dist/antd.css';
 
 import { criteriaToWeights, generateCombinations, calculateTotals } from './utilities';
@@ -8,6 +8,8 @@ import { comparisonAtom, criteriaAtom } from './state/atoms';
 import styles from './App.module.scss';
 
 const { Content } = Layout;
+const { Panel } = Collapse;
+
 const ComparisonList = listWithRecoilState(comparisonAtom);
 const CriteriaList = listWithRecoilState(criteriaAtom);
 
@@ -26,12 +28,21 @@ const comparatorsUtilityValues = [
 const totals = calculateTotals(comparatorsUtilityValues, criteriaRightLimit)(weights);
 
 function App() {
+  const panels = [
+    { name: 'Comparison', component: <ComparisonList placeholder="Enter a thing to compare" name="Comparison" /> },
+    { name: 'Criteria', component: <CriteriaList placeholder="Enter a criteria to compare" name="Criteria" /> },
+  ];
   return (
     <Layout>
       <Content className={styles.App}>
-        <ComparisonList placeholder="Enter a thing to compare" name="Comparison" />
+        <Collapse defaultActiveKey={panels.map((_p, index) => String(index))}>
+          {panels.map(({ name, component }, index) => (
+            <Panel header={name} key={String(index)}>
+              {component}
+            </Panel>
+          ))}
+        </Collapse>
         <Divider />
-        <CriteriaList placeholder="Enter a criteria to compare" name="Criteria" />
       </Content>
     </Layout>
   );

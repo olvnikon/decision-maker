@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const EditableList: React.FunctionComponent<Props> = ({ placeholder = '', name, items, setItems }) => (
-  <Card title={name}>
+  <Card>
     <AddInput
       placeholder={placeholder}
       onAction={(value) => {
