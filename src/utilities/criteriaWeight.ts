@@ -22,9 +22,8 @@ export const generateCombinations = (criteria: string[]) =>
 const applyCriteriaValue = (combinationComp: number[]) => (combs: combinationsT): combinationsT =>
   combs.map((combination, index) => [...combination, combinationComp[index]]);
 
-const generateMatrix = (combinationValues: combinationsT): matrixT => {
-  const matrix = [...new Array(combinationValues.length)].map(() => [...new Array(combinationValues.length)]);
-  // FIXME: matrix is generated incorrectly
+const generateMatrix = (criteria: string[]) => (combinationValues: combinationsT): matrixT => {
+  const matrix = [...new Array(criteria.length)].map(() => [...new Array(criteria.length)]);
   combinationValues.forEach(([i1, i2, value]) => {
     matrix[i1][i2] = value;
     matrix[i2][i1] = 1 / value;
@@ -46,5 +45,5 @@ const calculateGeometricMeans = (matrix: matrixT): geometricMeans =>
 const calculateWeights = (gm: geometricMeans) =>
   gm.map((geometricMean) => geometricMean / gm.reduce((acc, gm) => acc + gm, 0));
 
-export const criteriaToWeights = (combinationComp: number[]) =>
-  flow(applyCriteriaValue(combinationComp), generateMatrix, calculateGeometricMeans, calculateWeights);
+export const criteriaToWeights = (combinationComp: number[], criteria: string[]) =>
+  flow(applyCriteriaValue(combinationComp), generateMatrix(criteria), calculateGeometricMeans, calculateWeights);
