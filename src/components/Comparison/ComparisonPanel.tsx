@@ -1,17 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { criteriaAtom, combinationsSelector, combinationsComparisonAtom, totalsSelector } from '../../state/atoms';
+import { criteriaAtom, combinationsSelector, combinationsComparisonAtom } from '../../state/atoms';
 import { Comparison } from './Comparison';
+
+const Wrapper = styled.section`
+  padding: 0 50px;
+`;
 
 export const ComparisonPanel = () => {
   const criteria = useRecoilValue(criteriaAtom);
   const combinations = useRecoilValue(combinationsSelector);
   const [combinationsComparison, setCombinationsComparison] = useRecoilState(combinationsComparisonAtom);
-  const totals = useRecoilValue(totalsSelector);
 
-  console.log('===>', totals);
   return (
-    <section>
+    <Wrapper>
       {combinations.map(([cr1, cr2], index) => (
         <Comparison
           key={index}
@@ -26,6 +29,6 @@ export const ComparisonPanel = () => {
           criteria={[criteria[cr1], criteria[cr2]]}
         />
       ))}
-    </section>
+    </Wrapper>
   );
 };
