@@ -24,9 +24,12 @@ export const EditInput: React.FunctionComponent<Props> = ({ defaultValue = '', o
         onChange={(e) => {
           setValue(e.target.value);
         }}
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           if (e.key === 'Enter') {
             onOK(value);
+          }
+          if (e.key === 'Escape') {
+            onCancel();
           }
         }}
       />

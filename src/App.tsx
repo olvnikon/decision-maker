@@ -14,7 +14,7 @@ const { Panel } = Collapse;
 
 const ComparisonList = listWithRecoilState(comparisonAtom);
 const CriteriaList = listWithRecoilState(criteriaAtom);
-const panels = [
+const staticPanels = [
   { name: 'Comparison', component: <ComparisonList placeholder="Enter a thing to compare" name="Comparison" /> },
   { name: 'Criteria', component: <CriteriaList placeholder="Enter a criteria to compare" name="Criteria" /> },
   { name: 'Criteria comparison', component: <ComparisonPanel /> },
@@ -24,8 +24,8 @@ function App() {
   return (
     <Layout>
       <Content className={styles.App}>
-        <Collapse defaultActiveKey={panels.map((_p, index) => index)}>
-          {panels.map(({ name, component }, index) => (
+        <Collapse defaultActiveKey={staticPanels.map((_p, index) => index)}>
+          {staticPanels.map(({ name, component }, index) => (
             <Panel header={name} key={index}>
               {component}
             </Panel>
