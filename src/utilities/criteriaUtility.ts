@@ -1,4 +1,4 @@
-const calculateUtility = (value: number, rightLimit: number) =>
+export const calculateUtility = (value: number, rightLimit: number) =>
   value > rightLimit ? 0 : (-100 * value) / rightLimit + 100;
 
 export const calculateTotals = (comparatorsUtilityValues: Array<Array<number>>, criteriaRightLimit: number[]) => (
