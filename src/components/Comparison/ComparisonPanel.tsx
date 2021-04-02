@@ -5,7 +5,7 @@ import { criteriaAtom, combinationsSelector, combinationsComparisonAtom } from '
 import { Comparison } from './Comparison';
 
 const Wrapper = styled.section`
-  padding: 0 50px;
+  padding: 0 40px;
 `;
 
 export const ComparisonPanel = () => {
